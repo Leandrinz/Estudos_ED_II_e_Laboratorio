@@ -42,7 +42,7 @@ O `./` indica que o executável está **no diretório atual**.
 
 ---
 
-## 2.2) Execução com Debugger
+## 2.2) Execução com Debugger - GDB
 
 Para executar usando o **GDB (GNU Debugger)**:
 
@@ -113,6 +113,10 @@ Termina a execução da **função atual** e volta para quem a chamou.
 ## 6) quit
 
 Sai do **GDB**.
+
+## 7) layout src:
+
+Ativa o layout do GDB
 
 ```bash
 quit
