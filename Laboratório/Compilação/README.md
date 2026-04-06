@@ -1,6 +1,6 @@
 # ⚙️ Compilação em C
 
-# 1) Compilação
+## 1) Compilação
 
 ## 1.1) Compilação Padrão
 
@@ -13,14 +13,14 @@ gcc programa.c -o programa
 Explicação:
 
 - `gcc` → compilador
-- `programa.c` → arquivo fonte
+- `programa.c` → arquivo de código fonte
 - `-o programa` → nome do executável gerado
 
 ---
 
 ## 1.2) Compilação para Depuração
 
-Para permitir **debug com GDB**, usamos a flag `-g`:
+Para permitir **debug com GDB**, compilamos o programa a flag `-g`:
 
 ```bash
 gcc -g programa.c -o programa
@@ -30,7 +30,7 @@ Essa flag inclui **informações de depuração** no executável.
 
 ---
 
-# 2) Execução
+## 2) Execução
 
 ## 2.1) Execução Simples
 
@@ -60,87 +60,119 @@ Compilar **e executar em um único comando**:
 gcc programa.c -o programa && ./programa
 ```
 
-O `&&` significa:
-
-```
-execute o segundo comando apenas se o primeiro funcionar
-```
+O `&&` é um operador que significa "execute o segundo comando apenas se o primeiro funcionar".
 
 ---
 
 # 🐞 Comandos de Fluxo — GDB
 
-## 1) run [args]
+## Break [ponto]
+
+> 💡 Também pode ser abreviado como `b`.
+
+Adiciona um ponto de interrupção (breakpoint) para o depurador.
+Pode ser chamado com `codigo:linha` ou pelo nome de uma função existente.
+
+Exemplos:
+
+```
+break main
+```
+
+```
+break programa.c:15
+```
+
+## Run [argumentos]
+
+> 💡 Também pode ser abreviado como `r`.
 
 Inicia a execução do programa.
+É recomendado colocar um breakpoint antes.
+
+Exemplos:
 
 ```bash
 run
 ```
 
-ou passando argumentos:
-
 ```bash
+# Passando argumentos para o programa
 run argumento1 argumento2
 ```
 
----
+## Next
 
-## 2) next
+> 💡 Também pode ser abreviado como `n`.
 
 Executa **a próxima linha**, mas **não entra dentro de funções**.
 
+`[Linha 23]` &rarr; `next` &rarr; `[Linha 24]`.
+
 ---
 
-## 3) step
+## Step
+
+> 💡 Também pode ser abreviado como `s`.
 
 Executa a próxima linha **entrando dentro da função** chamada.
 
+`[Linha 23] (Chamada de X)` &rarr; `step` &rarr; `[Linha 5] (Declaração de X)`.
+
 ---
 
-## 4) continue
+## Continue
+
+> 💡 Também pode ser abreviado como `c`.
 
 Continua a execução **até o próximo breakpoint ou até o fim do programa**.
 
----
-
-## 5) finish
-
-Termina a execução da **função atual** e volta para quem a chamou.
+`[Linha 23]` &rarr; `continue` &rarr; `[Última Linha]`.
 
 ---
 
-## 6) quit
+## Quit
 
-Sai do **GDB**.
+> 💡 Também pode ser abreviado como `q`.
+
+Encerra instantaneamente o programa.
+
+`[Linha 23]` &rarr; `quit` &rarr; `[Programa Interrompido]`.
+
+---
+
+## Layout
+
+> [!NOTE]
+> Esse recurso está disponível apenas em sistemas Linux.
+
+Permite visualizar seu código pelo terminal durante a depuração.
+
+Exemplos:
 
 ```bash
-quit
-```
-
-## 7) LAYOUT:
-
-```bash
+# Mostra o código fonte em C
 layout src
-
 ```
 
-Ativa o layout do GDB
+```bash
+# Mostra o código fonte em Assembly
+layout asm
+```
 
-
-
----
+Para fechar o layout basta usar a combinação `Ctrl` + `X`, seguida da tecla `A`.
 
 # ✔ Resumo
 
-| Comando | Função |
-|------|------|
-gcc | Compilar programa |
-./programa | Executar programa |
-gdb | Depurar programa |
-run | Iniciar execução |
-next | Próxima linha |
-step | Entrar em função |
-continue | Continuar execução |
-finish | Sair da função |
-quit | Sair do debugger |
+| Comando    | Função                 |
+| ---------- | ---------------------- |
+| gcc        | Compilar programa.     |
+| ./programa | Executar programa.     |
+| gdb        | Depurar programa.      |
+| break      | Adiciona breakpoints.  |
+| run        | Executar depuração.    |
+| next       | Próxima linha.         |
+| step       | Entrar em funções.     |
+| continue   | Continuar depuração.   |
+| quit       | Interromper depuração. |
+| layout     | Exibir código.         |
