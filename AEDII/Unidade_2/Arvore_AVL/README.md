@@ -101,6 +101,38 @@ Existem 4 rotações principais:
 | LR   | A = +2 e B = -1 | Rotação dupla esquerda-direita |
 | RL   | A = -2 e B = +1 | Rotação dupla direita-esquerda |
 
+### O que são A e B?
+
+- **A** = primeiro nó que ficou desbalanceado após a inserção.
+- **B** = filho de A na direção do desbalanceamento.
+
+Exemplos:
+
+- Se a árvore ficou pesada para a esquerda, então B é o filho esquerdo de A.
+- Se a árvore ficou pesada para a direita, então B é o filho direito de A.
+
+---
+
+### Como interpretar
+
+| Caso | Significado |
+|---|---|
+| A = +2 | A subárvore esquerda de A ficou muito maior |
+| A = -2 | A subárvore direita de A ficou muito maior |
+| B = +1 | B está pesado para a esquerda |
+| B = -1 | B está pesado para a direita |
+
+---
+
+### Exemplo visual (LL)
+
+```text
+      A(+2)
+     /
+   B(+1)
+   /
+  C
+
 ---
 
 # Rotação LL
