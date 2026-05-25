@@ -172,11 +172,64 @@ d(v) = k para todo v em V
 
 ---
 
-# Resumo rápido
+## Definição 07:
+Um grafo simples G é dito **completo** se para cada par de vértice de G, existe uma aresta que os conectam. Denomina-se Kn.
 
-- G = (V, A)
-- Simples: sem loops e sem multi-arestas
-- Grau: número de arestas incidentes
-- Soma dos graus: sempre par
-- Subgrafo: parte de outro grafo
-- k-regular: todos os vértices com mesmo grau
+![alt text](image.png)
+
+### Propriedades de um Kn:
+  - Todos os vértices de um Kn tem grau (n-1)
+  - Kn tem a maior quantidade de arestas de um grafo simples com n vértices.
+  - Kn possui exatamente:
+    - ||Kn|| = N(N - 1) / 2 Arestas
+  - Propriedade de Grafos:
+
+## Representação de Grafos
+
+## Definição 8:
+A **Matriz de Adjacência** M(G) é uma matriz n x n na qual o vértice Vj, é representado pela coluna j, e os elementos Mij representam a quantidade de arestas que conectam o vértice Vi ao Vj.
+
+### Exemplo:
+
+![alt text](image-1.png)
+
+### Percusos Distintos (Aplicação Direta):
+Considere M a matriz de adjacência de um grafo G. Então M², M³, M^4 ... M^k representam, em seus elementos, a quantidade distinta de percursos entre quaisquer dois vértices com 2, 3, 4, ... k passos.
+
+Exemplo:
+
+![alt text](image-2.png)
+
+## Definição 09:
+**Dígrafo**:
+  Um Grafo orientado, ou **dígrafo**, representado por G = (V, A) com V sendo um conjunto não vazio de vértices e A um conjunto de Arestas orientadas.
+
+Exemplo:
+
+![alt text](image-3.png)
+
+## Definição 10:
+a) O grau de emissão de vi é a quantidade de Arestas que **saem** de vi
+
+b) O grau de recepção Dr(vi) é a quantidade de arestas que **chegam** de vi
+
+c) Um vértice **sumidouro** vi é um vértice com de(vi) = ∅
+
+d) Um vértice **fonte** vi é um vértice com dr(vi) = ∅
+
+Exemplo:
+
+![alt text](image-4.png)
+
+### Representação:
+Representado por M(c) como sendo a matriz de elementos Aij que associa a cada vértice i (emissos) com o vértice j (receptor) com o incremento (Aij). O elemento Aij recebe o valor de ∅
+
+![alt text](image-5.png)
+
+## Definição 11:
+  Um **grafo valorado** G(V,A,w) é um grafo no qual cada aresta tem um número associado. Estes números são representados por w(vi, vj)
+
+Exemplo:
+Desenhe um grafo que representa as possibilidades de resultados em três lançamentos de uma moeda:
+
+![alt text](image-6.png)
