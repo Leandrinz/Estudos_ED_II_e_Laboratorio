@@ -1,6 +1,6 @@
 # Hash & Filtro de Bloom — Guia de Estudo
 
-**Plano:** leia este arquivo inteiro (≈1h), depois abra o `GABARITO.md` e tente reproduzir cada código sem olhar (≈1h).
+**Plano:** leia este arquivo inteiro, depois abra o `GABARITO.md` e tente reproduzir cada código sem olhar .
 
 ---
 
