@@ -233,3 +233,92 @@ Exemplo:
 Desenhe um grafo que representa as possibilidades de resultados em três lançamentos de uma moeda:
 
 ![alt text](image-6.png)
+
+## Definição 12:
+Dado um grafo simples G = (V,A) Um grafo complementar de G é dado como Ḡ = (V,Ã), no qual se (x,y) pertence a A, (x,y) não pertencem a Ã e vice versa
+
+Exemplo:
+![alt text](image-7.png)
+
+Consequência:
+> Dado G = (V,A), Ḡ = (V,Ã) com |V| = N, H = (V, A U Ã) = Kn
+
+## Definição 13:
+Um grafo G é **bipartido** se, e somente se, o conjunto dos vértices V podem ser separados em dois conjuntos disjuntos V1 e V2 de tal forma que todas as Arestas tenham uma terminação em V1 e a outra em V2
+
+Exemplos:
+
+![alt text](image-10.png)
+
+# Isomorfismo
+
+## Definição 14:
+Dizemos que dois grafos G e H são isomorfos entre si se existem uma correspondência BIUNÍVOCA entre os vértices de G e H no qual sejam preservadas as relações de adjacência entre os vértices e arestas
+
+Exemplo:
+
+![alt text](image-9.png)
+
+## Definição 14 (alternativa):
+Dois grafos G e H são exemplos, denotados por G ≡ H, se existir uma função bijetora f:V(G) -> V(H) de tal forma que (x,y) ∈ A(G) se, e somente se:
+
+`(f(x), f(y)) ∈ A(H)`
+
+### Condições para que dois grafos sejam isomorfos
+
+Dois grafos são isomorfos quando possuem a mesma estrutura de conexões, mesmo que seus vértices tenham nomes ou posições diferentes.
+
+Para isso, devem ter:
+
+- O mesmo número de vértices;
+- O mesmo número de arestas;
+- A mesma sequência de graus dos vértices;
+- Uma correspondência entre os vértices que preserve as arestas.
+
+### Exemplo
+
+Grafo A:
+- Vértices: {1, 2, 3}
+- Arestas: {1-2, 2-3}
+
+Grafo B:
+- Vértices: {A, B, C}
+- Arestas: {A-B, B-C}
+
+São isomorfos pois 1→A, 2→B e 3→C mantém as mesmas ligações.
+
+# Algumas definições
+
+## K-Coloração:
+Uma k-coloração de vértices é uma associação f: Vg -> C do conjunto de vértices do grafo G a um conjunto C = {1,2,...,k} tal que seus elementos são chamados de cores
+
+## Grafo K-Colorido:
+Um Grafo é dito K-colorido se os nós associados às extremidades de cada arestas possuem cores diferentes
+
+## Número cromático:
+Representado por X(G), corresponde ao menor número de cores necessária à coloração do grafo
+
+#### Exemplo:
+
+![alt text](image-11.png)
+
+## Coloração de mapas:
+
+![alt text](image-12.png)
+
+### Problemas de coloração de mapas:
+
+![alt text](image-13.png)
+
+## Árvore de Extensão mínima:
+**Problema**: A partir de um grafo não orientado, gerar um subgrafo que conecta todos os vértices
+**Subproblema**: Determinar, em um grafo com pesos nas arestas, a menor árvore de extensão mínima
+
+![alt text](image-14.png)
+
+## Problema do fluxo máximo:
+- Rede elétrica
+- Transporte de fluidos
+- Distribuição de produtos
+
+![alt text](image-15.png)
