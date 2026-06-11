@@ -1,395 +1,516 @@
-# GRAFOS
+#  Grafos — Guia Completo de Estudo
+> **Algoritmos e Estrutura de Dados II**
+> Guia colaborativo para a prova
 
-Um **grafo** G é formado por:
+---
 
-- um conjunto **não vazio** V de vértices (ou nós)
-- um conjunto A de pares **não ordenados** de elementos de V, chamados de arestas
+## 📌 Índice Rápido
 
-Ou seja:
+| # | Tópico |
+|---|--------|
+| 1 | [O que é um Grafo?](#1-o-que-é-um-grafo) |
+| 2 | [Ordem e Tamanho](#2-ordem-e-tamanho) |
+| 3 | [Conceitos Básicos](#3-conceitos-básicos) |
+| 4 | [Grafo Simples](#4-grafo-simples) |
+| 5 | [Grau de um Vértice](#5-grau-de-um-vértice) |
+| 6 | [Subgrafo](#6-subgrafo) |
+| 7 | [Grafo k-Regular](#7-grafo-k-regular) |
+| 8 | [Grafo Completo (Kn)](#8-grafo-completo-kn) |
+| 9 | [Matriz de Adjacência](#9-matriz-de-adjacência) |
+| 10 | [Dígrafo](#10-dígrafo) |
+| 11 | [Grafo Valorado](#11-grafo-valorado) |
+| 12 | [Grafo Complementar](#12-grafo-complementar) |
+| 13 | [Grafo Bipartido](#13-grafo-bipartido) |
+| 14 | [Isomorfismo](#14-isomorfismo) |
+| 15 | [Coloração de Grafos](#15-coloração-de-grafos) |
+| 16 | [Percursos em Grafos](#16-percursos-em-grafos) |
+| 17 | [Grafo Conectado](#17-grafo-conectado) |
+| 18 | [Circuito Euleriano](#18-circuito-euleriano) |
+| 19 | [Ciclo Hamiltoniano](#19-ciclo-hamiltoniano) |
+| 20 | [Vértice de Corte e Fórmula de Euler](#20-vértice-de-corte-e-fórmula-de-euler) |
+| 21 | [Planaridade](#21-planaridade) |
+| ⚙️ | [Problemas Clássicos](#️-problemas-clássicos) |
 
+---
+
+## 1. O que é um Grafo?
+
+Um **grafo** G é uma estrutura formada por:
+
+- Um conjunto **não vazio** `V` de **vértices** (também chamados de nós)
+- Um conjunto `A` de **arestas** — pares **não ordenados** de elementos de `V`
+
+```
 G = (V, A)
+```
+
+> 💡 **Pense assim:** vértices são as "cidades" e arestas são as "estradas" entre elas.
 
 ---
 
-## Exemplos
+### 🔎 Exemplos Comentados
 
-### A)
+**Exemplo A — Grafo comum:**
+```
 V = {v1, v2, v3, v4, v5}
-A = {(v1, v2), (v1, v3), (v2, v4), (v3, v5)}
+A = {(v1,v2), (v1,v3), (v2,v4), (v3,v5)}
+```
+4 arestas conectando 5 vértices. Simples e direto.
 
 ---
 
-### B)
+**Exemplo B — Arestas definidas por regra:**
+```
 V = {1, 2, 3, 4, 5}
-A = {(i, j) | i = j + 2}
-
-Ou seja:
-A = {(1,3), (2,4), (3,5)}
+A = {(i,j) | i = j + 2}  →  A = {(1,3), (2,4), (3,5)}
+```
+A condição `i = j + 2` gera automaticamente as arestas.
 
 ---
 
-### C)
+**Exemplo C — Grafo com loops:**
+```
 V = {1, 2, 3, 4}
 A = {(1,2), (1,3), (2,3), (2,2), (4,4)}
-
-Observação:
-- (2,2) e (4,4) são loops
+```
+⚠️ `(2,2)` e `(4,4)` são **loops** — arestas que ligam um vértice a ele mesmo.
 
 ---
 
-### D)
+**Exemplo D — Grafo vazio (sem arestas):**
+```
 V = {1, 2, 3, 4, 5}
-A = {} (grafo sem arestas)
+A = {}
+```
+Vértices existem, mas nenhuma conexão entre eles.
 
 ---
 
-## Definição 01: Ordem e tamanho
+## 2. Ordem e Tamanho
 
-- Número de vértices: |V|
-- Número de arestas: |A|
+| Conceito | Notação | Significado |
+|----------|---------|-------------|
+| **Ordem** | `\|V\|` | Número de vértices |
+| **Tamanho** | `\|A\|` | Número de arestas |
 
-### Exemplo (A)
-
+**Exemplo (usando o Exemplo A acima):**
+```
 |V| = 5
 |A| = 4
+```
 
 ---
 
-## Aplicação: Copa do Mundo
+### 🏆 Aplicação: Copa do Mundo
 
-Cada grupo tem 4 seleções, e todas jogam entre si.
+> Em cada grupo com 4 seleções, todas jogam entre si. Quantos jogos?
 
-Número de jogos em um grupo:
-6 jogos
+Isso é equivalente a contar as arestas de um K₄ (grafo completo com 4 vértices):
 
-Como são 16 grupos:
-
-16 × 6 = 96 jogos
-
----
-
-## Definição 02: Conceitos básicos
-
-- Se (x, y) é uma aresta:
-  - x e y são **extremidades**
-
-- Se um vértice está ligado a uma aresta:
-  - ele é **incidente**
-
-- Se dois vértices compartilham uma aresta:
-  - são **adjacentes**
-
-- Se são adjacentes:
-  - são **vizinhos**
-
-- Conjunto dos vizinhos de x:
-  - N(x)
-
-- Se não são adjacentes:
-  - são **independentes**
-
-- Se um vértice não possui arestas:
-  - é **isolado**
-
-- Se uma aresta liga um vértice a ele mesmo:
-  - é um **loop**
-
-- Se existem várias arestas entre dois vértices:
-  - são **multi-arestas**
+```
+Jogos por grupo = 4×3/2 = 6 jogos
+16 grupos × 6 jogos = 96 jogos no total
+```
 
 ---
 
-## Definição 03: Grafo simples
+## 3. Conceitos Básicos
+
+| Termo | Definição |
+|-------|-----------|
+| **Extremidades** | Os dois vértices de uma aresta `(x, y)` |
+| **Incidente** | Vértice ligado a uma aresta |
+| **Adjacentes / Vizinhos** | Dois vértices que compartilham uma aresta |
+| **N(x)** | Conjunto dos vizinhos de `x` |
+| **Independentes** | Dois vértices que **não** são adjacentes |
+| **Isolado** | Vértice sem nenhuma aresta |
+| **Loop** | Aresta que liga um vértice a si mesmo |
+| **Multi-arestas** | Várias arestas entre o mesmo par de vértices |
+
+---
+
+## 4. Grafo Simples
 
 Um grafo é **simples** quando:
 
-- não possui loops
-- não possui multi-arestas
+✅ Não possui **loops**
+✅ Não possui **multi-arestas**
+
+> A maioria dos grafos estudados em teoria são simples. Se não for dito o contrário, assuma que é simples.
 
 ---
 
-## Definição 04: Grau de um vértice
+## 5. Grau de um Vértice
 
-O grau de um vértice v, denotado por d(v), é o número de arestas incidentes a ele.
+O **grau** de um vértice `v`, denotado por `d(v)`, é o número de arestas incidentes a ele.
 
-IMPORTANTE:
-- um loop conta como 2 no grau
+> ⚠️ **Atenção:** um loop conta como **2** no grau (entra e sai pelo mesmo vértice).
 
 ---
 
-### Exemplo
+###  Exemplo Completo
 
+```
 V = {a, b, c, d, e, f}
 A = {(a,d), (a,c), (b,f), (c,d), (c,e), (c,f)}
+```
 
-#### b) O grafo é simples?
-Sim, pois não possui loops nem multi-arestas.
+| Vértice | Grau |
+|---------|------|
+| a | 2 |
+| b | 1 |
+| c | 4 |
+| d | 2 |
+| e | 1 |
+| f | 2 |
 
-#### c) Grau dos vértices
-
-d(a) = 2
-d(b) = 1
-d(c) = 4
-d(d) = 2
-d(e) = 1
-d(f) = 2
-
----
-
-## Teorema
-
-A soma dos graus de todos os vértices é sempre par.
+**O grafo é simples?** ✅ Sim — sem loops e sem multi-arestas.
 
 ---
 
-## Corolário
+### 📏 Teorema e Corolário Importantes
 
-O número de vértices de grau ímpar é sempre par.
+> 🔵 **Teorema (Lema do Aperto de Mão):** A **soma dos graus** de todos os vértices é sempre **par**.
+>
+> Isso acontece porque cada aresta contribui com 2 para a soma total.
 
----
-
-## Definição 05: Subgrafo
-
-Um subgrafo H de G é tal que:
-
-- V(H) ⊆ V(G)
-- A(H) ⊆ A(G)
-
-E:
-se (x, y) ∈ A(H), então x e y pertencem a V(H)
+> 🟢 **Corolário:** O número de vértices com grau **ímpar** é sempre **par**.
 
 ---
 
-## Definição 06: Grafo k-regular
+## 6. Subgrafo
 
-Um grafo é k-regular quando:
+Um grafo `H` é **subgrafo** de `G` quando:
 
-- todos os vértices têm o mesmo grau k
+```
+V(H) ⊆ V(G)    →   todo vértice de H está em G
+A(H) ⊆ A(G)    →   toda aresta de H está em G
+```
 
-Ou seja:
+**Regra extra:** se uma aresta `(x,y)` está em `A(H)`, então `x` e `y` devem estar em `V(H)`.
 
-d(v) = k para todo v em V
+> 💡 Subgrafo = "pedaço" do grafo original, sem inventar nada novo.
 
 ---
 
-## Definição 07:
-Um grafo simples G é dito **completo** se para cada par de vértice de G, existe uma aresta que os conectam. Denomina-se Kn.
+## 7. Grafo k-Regular
 
-![alt text](image.png)
+Um grafo é **k-regular** quando **todos** os vértices têm exatamente o mesmo grau `k`.
 
-### Propriedades de um Kn:
-  - Todos os vértices de um Kn tem grau (n-1)
-  - Kn tem a maior quantidade de arestas de um grafo simples com n vértices.
-  - Kn possui exatamente:
-    - ||Kn|| = N(N - 1) / 2 Arestas
-  - Propriedade de Grafos:
+```
+d(v) = k,  para todo v ∈ V
+```
 
-## Representação de Grafos
+**Exemplos:**
+- Grafo 0-regular → todos os vértices isolados
+- Grafo 3-regular → cada vértice tem exatamente 3 vizinhos
 
-## Definição 8:
-A **Matriz de Adjacência** M(G) é uma matriz n x n na qual o vértice Vj, é representado pela coluna j, e os elementos Mij representam a quantidade de arestas que conectam o vértice Vi ao Vj.
+---
 
-### Exemplo:
+## 8. Grafo Completo (Kn)
 
-![alt text](image-1.png)
+Um grafo simples `G` é **completo** se **todo par de vértices** está conectado por uma aresta. É denotado por **Kₙ**, onde `n` é o número de vértices.
 
-### Percusos Distintos (Aplicação Direta):
-Considere M a matriz de adjacência de um grafo G. Então M², M³, M^4 ... M^k representam, em seus elementos, a quantidade distinta de percursos entre quaisquer dois vértices com 2, 3, 4, ... k passos.
+![Exemplos de grafos completos Kn](image.png)
 
-Exemplo:
+### 📋 Propriedades do Kₙ
 
-![alt text](image-2.png)
+| Propriedade | Valor |
+|-------------|-------|
+| Grau de cada vértice | `n - 1` |
+| Número de arestas | `n(n-1)/2` |
+| É o grafo simples com mais arestas para `n` vértices | ✅ |
 
-## Definição 09:
-**Dígrafo**:
-  Um Grafo orientado, ou **dígrafo**, representado por G = (V, A) com V sendo um conjunto não vazio de vértices e A um conjunto de Arestas orientadas.
+**Exemplo:** K₅ tem grau 4 em cada vértice e `5×4/2 = 10` arestas.
 
-Exemplo:
+---
 
-![alt text](image-3.png)
+## 9. Matriz de Adjacência
 
-## Definição 10:
-a) O grau de emissão de vi é a quantidade de Arestas que **saem** de vi
+A **Matriz de Adjacência** `M(G)` é uma matriz `n × n` onde:
 
-b) O grau de recepção Dr(vi) é a quantidade de arestas que **chegam** de vi
+- Linhas e colunas representam os vértices
+- O elemento `Mᵢⱼ` indica a **quantidade de arestas** entre o vértice `i` e o vértice `j`
 
-c) Um vértice **sumidouro** vi é um vértice com de(vi) = ∅
+![Exemplo de Matriz de Adjacência](image-1.png)
 
-d) Um vértice **fonte** vi é um vértice com dr(vi) = ∅
+> 💡 Em grafos simples, a matriz é **simétrica** e tem apenas 0s e 1s (sem loops, sem multi-arestas).
 
-Exemplo:
+---
 
-![alt text](image-4.png)
+### 🔁 Percursos Distintos com Potências da Matriz
 
-### Representação:
-Representado por M(c) como sendo a matriz de elementos Aij que associa a cada vértice i (emissos) com o vértice j (receptor) com o incremento (Aij). O elemento Aij recebe o valor de ∅
+> Se `M` é a matriz de adjacência de `G`, então:
+>
+> - `M²` → número de percursos de **2 passos** entre quaisquer dois vértices
+> - `M³` → percursos de **3 passos**
+> - `Mᵏ` → percursos de **k passos**
 
-![alt text](image-5.png)
+![Exemplo de potência da Matriz de Adjacência](image-2.png)
 
-## Definição 11:
-  Um **grafo valorado** G(V,A,w) é um grafo no qual cada aresta tem um número associado. Estes números são representados por w(vi, vj)
+---
 
-Exemplo:
-Desenhe um grafo que representa as possibilidades de resultados em três lançamentos de uma moeda:
+## 10. Dígrafo
 
-![alt text](image-6.png)
+Um **dígrafo** (grafo orientado) é `G = (V, A)` onde as arestas têm **direção** (são orientadas).
 
-## Definição 12:
-Dado um grafo simples G = (V,A) Um grafo complementar de G é dado como Ḡ = (V,Ã), no qual se (x,y) pertence a A, (x,y) não pertencem a Ã e vice versa
+![Exemplo de dígrafo](image-3.png)
 
-Exemplo:
-![alt text](image-7.png)
+### Graus em Dígrafos
 
-Consequência:
-> Dado G = (V,A), Ḡ = (V,Ã) com |V| = N, H = (V, A U Ã) = Kn
+| Conceito | Definição |
+|----------|-----------|
+| **Grau de emissão** `de(v)` | Quantidade de arestas que **saem** de `v` |
+| **Grau de recepção** `dr(v)` | Quantidade de arestas que **chegam** em `v` |
+| **Sumidouro** | Vértice com `de(v) = 0` (só recebe) |
+| **Fonte** | Vértice com `dr(v) = 0` (só emite) |
 
-## Definição 13:
-Um grafo G é **bipartido** se, e somente se, o conjunto dos vértices V podem ser separados em dois conjuntos disjuntos V1 e V2 de tal forma que todas as Arestas tenham uma terminação em V1 e a outra em V2
+![Exemplo de graus em dígrafo](image-4.png)
 
-Exemplos:
+### Matriz de um Dígrafo
 
-![alt text](image-10.png)
+Representada por `M(c)`, onde o elemento `Aᵢⱼ` associa o vértice emissor `i` ao receptor `j`.
 
-# Isomorfismo
+![Matriz de adjacência de dígrafo](image-5.png)
 
-## Definição 14:
-Dizemos que dois grafos G e H são isomorfos entre si se existem uma correspondência BIUNÍVOCA entre os vértices de G e H no qual sejam preservadas as relações de adjacência entre os vértices e arestas
+---
 
-Exemplo:
+## 11. Grafo Valorado
 
-![alt text](image-9.png)
+Um **grafo valorado** `G(V, A, w)` é um grafo onde cada aresta tem um **peso** (número) associado, representado por `w(vᵢ, vⱼ)`.
 
-## Definição 14 (alternativa):
-Dois grafos G e H são exemplos, denotados por G ≡ H, se existir uma função bijetora f:V(G) -> V(H) de tal forma que (x,y) ∈ A(G) se, e somente se:
+**Exemplo prático:** Grafo dos resultados de 3 lançamentos de moeda.
 
-`(f(x), f(y)) ∈ A(H)`
+![Grafo valorado — resultados de lançamentos de moeda](image-6.png)
 
-### Condições para que dois grafos sejam isomorfos
+---
 
-Dois grafos são isomorfos quando possuem a mesma estrutura de conexões, mesmo que seus vértices tenham nomes ou posições diferentes.
+## 12. Grafo Complementar
 
-Para isso, devem ter:
+Dado `G = (V, A)`, o **complementar** `Ḡ = (V, Ã)` é tal que:
 
-- O mesmo número de vértices;
-- O mesmo número de arestas;
-- A mesma sequência de graus dos vértices;
-- Uma correspondência entre os vértices que preserve as arestas.
+```
+(x,y) ∈ A  ↔  (x,y) ∉ Ã
+```
 
-### Exemplo
+Em outras palavras: **o que era aresta deixa de ser, e o que não era aresta passa a ser.**
 
-Grafo A:
-- Vértices: {1, 2, 3}
-- Arestas: {1-2, 2-3}
+![Exemplo de grafo complementar](image-7.png)
 
-Grafo B:
-- Vértices: {A, B, C}
-- Arestas: {A-B, B-C}
+> 🔑 **Consequência importante:**
+> Se `G` e `Ḡ` têm os mesmos `n` vértices, então `G ∪ Ḡ = Kₙ` (grafo completo).
 
-São isomorfos pois 1→A, 2→B e 3→C mantém as mesmas ligações.
+---
 
-# Algumas definições
+## 13. Grafo Bipartido
 
-## K-Coloração:
-Uma k-coloração de vértices é uma associação f: Vg -> C do conjunto de vértices do grafo G a um conjunto C = {1,2,...,k} tal que seus elementos são chamados de cores
+Um grafo `G` é **bipartido** se seus vértices podem ser divididos em **dois grupos disjuntos** `V₁` e `V₂`, de modo que **toda aresta** conecte um vértice de `V₁` a um vértice de `V₂`.
 
-## Grafo K-Colorido:
-Um Grafo é dito K-colorido se os nós associados às extremidades de cada arestas possuem cores diferentes
+> ⚠️ Não existe aresta entre dois vértices do mesmo grupo.
 
-## Número cromático:
-Representado por X(G), corresponde ao menor número de cores necessária à coloração do grafo
+![Exemplo de grafo bipartido](image-10.png)
 
-#### Exemplo:
+---
 
-![alt text](image-11.png)
+## 14. Isomorfismo
 
-## Coloração de mapas:
+Dois grafos `G` e `H` são **isomorfos** (`G ≅ H`) se existe uma função bijetora:
 
-![alt text](image-12.png)
+```
+f: V(G) → V(H)
+```
 
-### Problemas de coloração de mapas:
+tal que `(x,y) ∈ A(G)` **se e somente se** `(f(x), f(y)) ∈ A(H)`.
 
-![alt text](image-13.png)
+> 💡 Grafos isomorfos têm a **mesma estrutura**, só os rótulos dos vértices mudam.
 
-## Árvore de Extensão mínima:
-**Problema**: A partir de um grafo não orientado, gerar um subgrafo que conecta todos os vértices
-**Subproblema**: Determinar, em um grafo com pesos nas arestas, a menor árvore de extensão mínima
+![Exemplo de grafos isomorfos](image-9.png)
 
-![alt text](image-14.png)
+---
 
-## Problema do fluxo máximo:
-- Rede elétrica
-- Transporte de fluidos
-- Distribuição de produtos
+### ✅ Checklist para Verificar Isomorfismo
 
-![alt text](image-15.png)
+Para dois grafos serem isomorfos, **todos** os itens abaixo devem ser verdadeiros:
 
+- [ ] Mesmo número de vértices `|V|`
+- [ ] Mesmo número de arestas `|A|`
+- [ ] Mesma sequência de graus (ordenada)
+- [ ] Existência de uma correspondência que preserve as adjacências
 
-# Percusos em Grafos
+**Exemplo:**
 
-## Definição 15:
+| Grafo A | Grafo B |
+|---------|---------|
+| V = {1, 2, 3} | V = {A, B, C} |
+| A = {1-2, 2-3} | A = {A-B, B-C} |
 
-- A) Um **percurso** de um grafo G é uma sequência finita de vértices de tal forma que existe uma aresta entre consecutivos vértices
-- B) Uma **Trilha** é um percuso sem arestas repetidas
-- C) Um **Caminho** é uma trilha sem vértices repetidos
-- D) Um **Percurso fechado** é um percurso que inicia e termina no mesmo vértice
-- E) Um **Circuito** é uma trilha fechada
-- F) Um **Ciclo** é um caminho fechado
-- G) O comprimento de qualquer tour definido nesta definição é representado pela quantidade de arestas
+Correspondência: `1→A`, `2→B`, `3→C` ✅ São isomorfos!
 
-## Definição 16:
-Um grafo G é dito conectado se para quaisquer pares de vértices X e Y, existe um caminho de X para Y
+> ⚠️ Se qualquer item do checklist falhar, os grafos **não são** isomorfos e você pode parar ali.
 
-### Teorema:
-Se todo vértice de um grafo G possui grau de no mínimo 2, então G possui um ciclo.
+---
 
-Exemplo:
+## 15. Coloração de Grafos
 
-![alt text](image-16.png)
+### Definições
 
-## Definição 17:
-O grafo G representa um circuito Euleriano se for uma trilha fechada que cortem todas as arestas de G
+| Termo | Definição |
+|-------|-----------|
+| **k-coloração** | Associação de cores `{1, 2, ..., k}` aos vértices |
+| **Grafo k-colorido** | Vértices adjacentes têm cores **diferentes** |
+| **Número cromático `X(G)`** | Menor número de cores para colorir `G` corretamente |
 
-### Teorema:
-Um grafo é Euleriano se, e somente se:
-  - For conectado
-  - O grau de todos os vértices são pares
+![Exemplo de coloração de grafos](image-11.png)
 
-## Definição 18:
-Um ciclo no grafo G que contém todos os vértices de G é denominado Hamiltoniano
+### 🗺️ Coloração de Mapas
 
-Exemplo:
+Um mapa pode ser modelado como grafo: regiões são vértices, e regiões que se tocam são adjacentes.
 
-![alt text](image-17.png)
+![Coloração de mapas](image-12.png)
 
-### Teorema:
-Se todo vértice de um grafo possui grau de no minímo 2, então G possui um ciclo.
+![Problemas de coloração de mapas](image-13.png)
 
-Exemplo:
+> 🌍 **Teorema das 4 Cores:** Todo mapa planar pode ser colorido com no máximo 4 cores.
 
-![alt text](image-18.png)
+---
 
-## Definição 19:
-Um **Vértice de Corte** é um vértice cuja remoção com suas arestas incidentes provocam o aumento de grafos desconectados
+## 16. Percursos em Grafos
 
-Exemplo:
+| Conceito | Definição |
+|----------|-----------|
+| **Percurso** | Sequência de vértices onde cada par consecutivo tem uma aresta |
+| **Trilha** | Percurso **sem arestas repetidas** |
+| **Caminho** | Trilha **sem vértices repetidos** |
+| **Percurso fechado** | Inicia e termina no **mesmo vértice** |
+| **Circuito** | Trilha **fechada** |
+| **Ciclo** | Caminho **fechado** |
+| **Comprimento** | Número de **arestas** do percurso |
 
-![alt text](image-19.png)
+> 📝 **Hierarquia para memorizar:**
+> ```
+> Percurso  ⊃  Trilha (sem aresta repetida)  ⊃  Caminho (sem vértice repetido)
+>   ↓                ↓                                 ↓
+> Fechado       Circuito                           Ciclo
+> ```
 
-### Fórmula de Euler:
-Seja G um plano desenhado por um grafo conectado E seja V, E e F os vértices, Arestas e Faces desse grafo, portando
-```c
+---
+
+## 17. Grafo Conectado
+
+Um grafo `G` é **conectado** se para **qualquer par de vértices** `x` e `y`, existe um caminho de `x` até `y`.
+
+> 💡 Um grafo desconectado tem "ilhas" de vértices sem ligação entre si.
+
+> 🔵 **Teorema:** Se todo vértice de `G` tem grau **≥ 2**, então `G` possui um **ciclo**.
+
+![Exemplo de grafo conectado](image-16.png)
+
+---
+
+## 18. Circuito Euleriano
+
+Um **Circuito Euleriano** é uma **trilha fechada** que percorre **todas as arestas** de `G` exatamente uma vez.
+
+### 🔑 Teorema de Euler
+
+> Um grafo é **Euleriano** se, e somente se:
+> 1. For **conectado**
+> 2. **Todos** os vértices tiverem grau **par**
+
+
+---
+
+## 19. Ciclo Hamiltoniano
+
+Um **Ciclo Hamiltoniano** é um ciclo que passa por **todos os vértices** de `G` exatamente uma vez.
+
+![Exemplo de ciclo hamiltoniano](image-17.png)
+
+> ⚠️ Diferença-chave:
+> - **Euleriano** → passa por todas as **arestas**
+> - **Hamiltoniano** → passa por todos os **vértices**
+
+> 🔵 **Teorema:** Se todo vértice de `G` tem grau **≥ 2**, então `G` possui um ciclo (não necessariamente Hamiltoniano).
+
+![Exemplo de teorema hamiltoniano](image-18.png)
+
+---
+
+## 20. Vértice de Corte e Fórmula de Euler
+
+### Vértice de Corte
+
+Um **vértice de corte** é um vértice cuja **remoção** (junto com suas arestas) **aumenta** o número de componentes conectados do grafo.
+
+![Exemplo de vértice de corte](image-19.png)
+
+---
+
+### 📐 Fórmula de Euler (para Grafos Planares)
+
+Para um grafo **planar** e **conectado**, com `V` vértices, `E` arestas e `F` faces:
+
+```
 V - E + F = 2
 ```
 
-Exemplo:
+![Exemplo da Fórmula de Euler](image-20.png)
 
-![alt text](image-20.png)
+> 💡 Não esqueça de contar a **face externa** (o "exterior" do grafo desenhado no plano) no total de faces `F`.
 
-# Planaridade:
+---
 
-## Definição 20:
-Um grafo é planar se pode ser desenhado no plano sem cruzamento de Arestas
+## 21. Planaridade
 
-Exemplos:
+Um grafo é **planar** se pode ser desenhado no plano **sem que nenhuma aresta se cruze** com outra.
 
-![alt text](image-21.png)
+![Exemplos de grafos planares e não-planares](image-21.png)
+
+> 🔎 **Dica:** K₅ e K₃,₃ são os dois grafos "base" não-planares (Teorema de Kuratowski). Se um grafo contiver uma subdivisão de K₅ ou K₃,₃, ele **não é planar**.
+
+---
+
+## ⚙️ Problemas Clássicos
+
+### 🌳 Árvore de Extensão Mínima
+
+**Problema:** Dado um grafo com pesos nas arestas, encontrar o subgrafo que **conecta todos os vértices** com o **menor custo total** (menor soma de pesos).
+
+**Aplicações:** Redes de telecomunicação, infraestrutura elétrica, rodovias.
+
+![Árvore de extensão mínima](image-14.png)
+
+---
+
+### 🌊 Problema do Fluxo Máximo
+
+**Problema:** Dado um dígrafo com capacidades nas arestas, qual o **maior fluxo** possível da fonte até o sumidouro?
+
+**Aplicações:** Redes elétricas, transporte de fluidos, distribuição de produtos.
+
+![Problema do fluxo máximo](image-15.png)
+
+---
+
+## 🧠 Resumo Final — Tabela de Bolso
+
+| Conceito | Palavra-chave |
+|----------|--------------|
+| Grafo | `G = (V, A)` |
+| Simples | Sem loop, sem multi-aresta |
+| k-Regular | Todos com grau `k` |
+| Completo (Kₙ) | Todo par conectado, `n(n-1)/2` arestas |
+| Bipartido | Vértices em 2 grupos, arestas só entre grupos |
+| Isomorfismo | Mesma estrutura, rótulos diferentes |
+| Euleriano | Conectado + todos os graus pares |
+| Hamiltoniano | Passa por todos os vértices |
+| Planar | Desenhável sem cruzamento de arestas |
+| Número cromático | Mínimo de cores para colorir sem conflito |
+| Vértice de corte | Remoção desconecta o grafo |
+| Fórmula de Euler | `V - E + F = 2` (grafo planar conectado) |
+
+---
+
+> 📚 **Dica de estudo:** Para cada definição, tente **construir um exemplo próprio** e verificar as propriedades. 
+>
+> Bons estudos e boa prova a todos! 💪
