@@ -322,3 +322,74 @@ Representado por X(G), corresponde ao menor número de cores necessária à colo
 - Distribuição de produtos
 
 ![alt text](image-15.png)
+
+
+# Percusos em Grafos
+
+## Definição 15:
+
+- A) Um **percurso** de um grafo G é uma sequência finita de vértices de tal forma que existe uma aresta entre consecutivos vértices
+- B) Uma **Trilha** é um percuso sem arestas repetidas
+- C) Um **Caminho** é uma trilha sem vértices repetidos
+- D) Um **Percurso fechado** é um percurso que inicia e termina no mesmo vértice
+- E) Um **Circuito** é uma trilha fechada
+- F) Um **Ciclo** é um caminho fechado
+- G) O comprimento de qualquer tour definido nesta definição é representado pela quantidade de arestas
+
+## Definição 16:
+Um grafo G é dito conectado se para quaisquer pares de vértices X e Y, existe um caminho de X para Y
+
+### Teorema:
+Se todo vértice de um grafo G possui grau de no mínimo 2, então G possui um ciclo.
+
+Exemplo:
+
+![alt text](image-16.png)
+
+## Definição 17:
+O grafo G representa um circuito Euleriano se for uma trilha fechada que cortem todas as arestas de G
+
+### Teorema:
+Um grafo é Euleriano se, e somente se:
+  - For conectado
+  - O grau de todos os vértices são pares
+
+## Definição 18:
+Um ciclo no grafo G que contém todos os vértices de G é denominado Hamiltoniano
+
+Exemplo:
+
+![alt text](image-17.png)
+
+### Teorema:
+Se todo vértice de um grafo possui grau de no minímo 2, então G possui um ciclo.
+
+Exemplo:
+
+![alt text](image-18.png)
+
+## Definição 19:
+Um **Vértice de Corte** é um vértice cuja remoção com suas arestas incidentes provocam o aumento de grafos desconectados
+
+Exemplo:
+
+![alt text](image-19.png)
+
+### Fórmula de Euler:
+Seja G um plano desenhado por um grafo conectado E seja V, E e F os vértices, Arestas e Faces desse grafo, portando
+```c
+V - E + F = 2
+```
+
+Exemplo:
+
+![alt text](image-20.png)
+
+# Planaridade:
+
+## Definição 20:
+Um grafo é planar se pode ser desenhado no plano sem cruzamento de Arestas
+
+Exemplos:
+
+![alt text](image-21.png)
